@@ -1359,7 +1359,7 @@ h1 span {
 .footer-content-left .footer-card-content p {
   color: #d0d0d0;
 }
-.footer-content-left .card-btn input {
+.footer-content-left .card-btn input, .input-tag-footer {
   height: 64px;
   margin-bottom: 18px;
   border-radius: 7px;
