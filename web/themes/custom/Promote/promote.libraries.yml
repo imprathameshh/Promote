@@ -1,0 +1,21 @@
+global-library:
+  css:
+    theme:
+      assets/css/bootstrap.min.css: {}
+      assets/css/slick.css: {}
+      assets/css/style.css: {}
+      assets/css/media.css: {}
+  js:
+    assets/js/jquery.min.js: {}
+    assets/js/popper.min.js: {}
+    assets/js/bootstrap.min.js: {}
+    assets/js/slick.min.js: {}
+    assets/js/setting.js: {}
+
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/jquery.form
+    - core/drupal.ajax
+    - core/drupal.dialog
+    - core/drupal.dialog.ajax

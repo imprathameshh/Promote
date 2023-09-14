@@ -1,0 +1,21 @@
+name: Promote Theme
+description: A custom Theme for Promote.
+type: theme
+base theme: false
+version: version
+core_version_requirement: ^9 || ^10
+libraries:
+  - promote/global-library
+
+regions:
+  header: "header"
+  site_logo: "Site logo"
+  top_page: "Page Top"
+  breadcrumbs: "breadcrumbs"
+  content: "content"
+  bottom_page: "Page Bottom"
+  footer_left: "Footer Left"
+  footer_right_top: "Footer Right Top"
+  footer_right_first: "Footer Right First"
+  footer_right_second: "Footer Right Second"
+  footer_right_third: "Footer Right Third"

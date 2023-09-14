@@ -1,0 +1,10 @@
+name: promote
+recipe: drupal10
+config:
+  webroot: web
+services:
+  sql-promote:
+    type: phpmyadmin
+proxy:
+  sql-promote:
+    - promote.lando.site
