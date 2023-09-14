@@ -46,7 +46,7 @@
 
 					<div class="footer-list-wrap row">
 
-						<div class="footer-list col-4">
+						<div class="footer-list col-md-4 col-sm-12">
 							<div class="footer-list-title">
 								<img src="assets/images/icons/footer-list-head-1.png" alt="icon" class="icon">
 								<div class="title">Pages</div>
@@ -61,7 +61,7 @@
 							</ul>
 						</div>
 
-						<div class="footer-list col-4">
+						<div class="footer-list col-md-4 col-sm-12">
 							<div class="footer-list-title">
 								<img src="assets/images/icons/footer-list-head-2.png" alt="icon" class="icon">
 								<div class="title">Pages</div>
@@ -76,7 +76,7 @@
 						</div>
 
 
-						<div class="footer-list col-4">
+						<div class="footer-list col-md-4 col-sm-12">
 							<div class="footer-list-title">
 								<img src="assets/images/icons/footer-list-head-3.png" alt="icon" class="icon">
 								<div class="title">Pages</div>
