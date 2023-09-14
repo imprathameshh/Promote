@@ -225,6 +225,7 @@ p {
   transition: all 0.3s ease-in-out;
   text-align: center;
 }
+.latestpost-card .latestpost-card-content .btn-wrap .btn-outline:hover,
 .btn-outline:hover {
   background: #292930;
   color: #ffffff;
