@@ -252,7 +252,7 @@ p {
 .btn-white:hover span svg path {
   fill: #ffffff;
 }
-.btn-yellow {
+.btn-yellow ,.footer-content-left .card-btn .btn-yellow {
   text-align: center;
   padding: 15px;
   border-radius: 7px;
@@ -264,6 +264,7 @@ p {
   display: inline-block;
   transition: all 0.3s ease-in-out;
 }
+.footer-content-left .card-btn .btn-yellow:hover,
 .btn-yellow:hover {
   color: #292930;
   background: #ffffff;
