@@ -1,0 +1,147 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set classes = ['casestudies-wrap',
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% block paragraph %}
+	<div{{attributes.addClass(classes)}}>
+		<div class="container">
+			<div class="casestudies-content">
+				<div class="casestudy-head">
+					<div class="casestudy-head-left">
+						<div class="header-icon">
+							<img src="{{file_url(paragraph.field_accordion_paragraph_icon.0.entity.field_media_image.0.entity.uri.0.value)}}" alt="">
+						</div>
+						<div class="title">
+							<div class="sub-title-white">
+								{{paragraph.field_accordion_para_sub_title.0.value|raw}}
+							</div>
+							{{paragraph.field_accordion_para_title.0.value|raw}}
+						</div>
+					</div>
+					<div class="casestudys-head-right">
+						<a href="{{paragraph.field_accordion_paragraph_cta.0.uri}}" class="btn-white">{{paragraph.field_accordion_paragraph_cta.0.title}}
+							<span>
+								<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewbox="0 0 14 15" fill="none">
+									<path d="M-3.0598e-07 7.5C-2.45463e-07 8.88447 0.410543 10.2378 1.17971 11.389C1.94888 12.5401 3.04213 13.4373 4.32122 13.9672C5.6003 14.497 7.00776 14.6356 8.36563 14.3655C9.7235 14.0954 10.9708 13.4287 11.9497 12.4497C12.9287 11.4708 13.5954 10.2235 13.8655 8.86563C14.1356 7.50776 13.997 6.1003 13.4672 4.82121C12.9373 3.54213 12.0401 2.44888 10.889 1.67971C9.73784 0.910542 8.38447 0.499999 7 0.499999C5.14458 0.503557 3.36617 1.2422 2.05418 2.55418C0.742198 3.86617 0.00355748 5.64458 -3.0598e-07 7.5ZM6.55577 4.67981L9.24807 7.10288C9.30316 7.15333 9.34716 7.21469 9.37725 7.28305C9.40735 7.35142 9.42289 7.4253 9.42289 7.5C9.42289 7.5747 9.40735 7.64858 9.37725 7.71694C9.34716 7.78531 9.30316 7.84667 9.24807 7.89711L6.55577 10.3202C6.44988 10.413 6.31186 10.4606 6.17128 10.4528C6.0307 10.4451 5.89875 10.3826 5.8037 10.2788C5.70864 10.1749 5.65804 10.0379 5.66274 9.89723C5.66745 9.75651 5.72707 9.62324 5.82884 9.52596L8.07692 7.5L5.82884 5.47404C5.77492 5.42679 5.73098 5.36925 5.69959 5.30479C5.6682 5.24034 5.65 5.17026 5.64606 5.09867C5.64212 5.02709 5.65251 4.95544 5.67662 4.88792C5.70074 4.82041 5.73809 4.75839 5.7865 4.7055C5.8349 4.65262 5.89338 4.60993 5.9585 4.57995C6.02362 4.54996 6.09408 4.53328 6.16573 4.53089C6.23738 4.52849 6.30879 4.54044 6.37577 4.56601C6.44275 4.59158 6.50394 4.63027 6.55577 4.67981Z" fill="#5956E8"/>
+								</svg>
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="casestudies-body">
+					<div
+						class="casestudies-content-left">
+						<!-- Accordiaon -->
+						<div class="accordion case-accordion" id="case-accordion">
+							{% for items in paragraph.field_accordion_cards_ref %}
+								<div class="accordion-item">
+									<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#case-accordion-{{loop.index}}" {% if loop.index == 1 %} aria-expanded="true" {% endif %}>
+										{{items.entity.field_accordion_cards_title.0.value|raw}}
+									</button>
+									<div id="case-accordion-{{loop.index}}" class="accordion-collapse collapse {% if loop.index == 1 %} show {% endif %}" data-bs-parent="#case-accordion">
+										<div class="accordion-body">
+											{{items.entity.field_accordion_cards_desc.0.value|raw}}
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+
+					<div class="casestudies-content-right">
+						<div class="img-wrap">
+							<img src="{{file_url(paragraph.field_accordion_image.0.entity.field_media_image.0.entity.uri.0.value)}}" alt="">
+						</div>
+					</div>
+				</div>
+
+				<div class="casestudies-footer">
+					<ul>
+						<li>
+							<div class="no">
+								<span>325</span>
+								<span class="blue">+</span>
+							</div>
+							<div class="no-info">Clients Worldwide
+							</div>
+						</li>
+						<li>
+							<div class="no">
+								<span>975</span>
+								<span class="red">+</span>
+							</div>
+							<div class="no-info">Projects Completed</div>
+						</li>
+						<li>
+							<div class="no">
+								<span>70</span>
+								<span class="yello">+</span>
+							</div>
+							<div class="no-info">Team Members</div>
+						</li>
+						<li>
+							<div class="no">
+								<span>85m</span>
+								<span class="green">+</span>
+							</div>
+							<div class="no-info">Revenue Generated
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="btn-bottom">
+					<a href="#" class="btn-white">Our Services
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewbox="0 0 14 15" fill="none">
+								<path d="M-3.0598e-07 7.5C-2.45463e-07 8.88447 0.410543 10.2378 1.17971 11.389C1.94888 12.5401 3.04213 13.4373 4.32122 13.9672C5.6003 14.497 7.00776 14.6356 8.36563 14.3655C9.7235 14.0954 10.9708 13.4287 11.9497 12.4497C12.9287 11.4708 13.5954 10.2235 13.8655 8.86563C14.1356 7.50776 13.997 6.1003 13.4672 4.82121C12.9373 3.54213 12.0401 2.44888 10.889 1.67971C9.73784 0.910542 8.38447 0.499999 7 0.499999C5.14458 0.503557 3.36617 1.2422 2.05418 2.55418C0.742198 3.86617 0.00355748 5.64458 -3.0598e-07 7.5ZM6.55577 4.67981L9.24807 7.10288C9.30316 7.15333 9.34716 7.21469 9.37725 7.28305C9.40735 7.35142 9.42289 7.4253 9.42289 7.5C9.42289 7.5747 9.40735 7.64858 9.37725 7.71694C9.34716 7.78531 9.30316 7.84667 9.24807 7.89711L6.55577 10.3202C6.44988 10.413 6.31186 10.4606 6.17128 10.4528C6.0307 10.4451 5.89875 10.3826 5.8037 10.2788C5.70864 10.1749 5.65804 10.0379 5.66274 9.89723C5.66745 9.75651 5.72707 9.62324 5.82884 9.52596L8.07692 7.5L5.82884 5.47404C5.77492 5.42679 5.73098 5.36925 5.69959 5.30479C5.6682 5.24034 5.65 5.17026 5.64606 5.09867C5.64212 5.02709 5.65251 4.95544 5.67662 4.88792C5.70074 4.82041 5.73809 4.75839 5.7865 4.7055C5.8349 4.65262 5.89338 4.60993 5.9585 4.57995C6.02362 4.54996 6.09408 4.53328 6.16573 4.53089C6.23738 4.52849 6.30879 4.54044 6.37577 4.56601C6.44275 4.59158 6.50394 4.63027 6.55577 4.67981Z" fill="#5956E8"/>
+							</svg>
+						</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock paragraph %}
