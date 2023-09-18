@@ -6,7 +6,7 @@
  *
  * @inheritdoc
  */
-function promote_suggestions_views_view_alter(array &$suggestions, array $variables)
+function promote_theme_suggestions_views_view_alter(array &$suggestions, array $variables)
 {
   $suggestions[] = 'views_view__' . $variables['view']->id() . '__' . $variables['view']->current_display;
 }
@@ -14,8 +14,15 @@ function promote_suggestions_views_view_alter(array &$suggestions, array $variab
 function promote_form_alter(&$form, &$form_state, $form_id)
 {
   if ($form['#form_id'] == 'views_exposed_form') {
-    // var_dump($form);
-
+  }
+  // Form alter for blog search form. 
+  if ($form['#id'] == 'views-exposed-form-blogs-block-2') {
+    $form['actions']['submit']['#value'] = 'Search';
+    $form['actions']['submit']['#attributes']['class'][] = 'btn-black';
+  }
+  // Form alter for blog page newsletter form
+  if ($form['#form_id'] == 'webform_submission_footer_email_subscription_block_content_5_add_form') {
+    // dump($form);
   }
 }
 /**hook_theme_suggestions_page_alter()*/

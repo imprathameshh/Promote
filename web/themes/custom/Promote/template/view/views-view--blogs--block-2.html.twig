@@ -41,16 +41,16 @@
 	{{ title_prefix }}
 	{{ title }}
 	{{ title_suffix }}
-	<div class="latestpost-wrap">
+	<div class="blog-articles">
 		<div class="container">
-			<div class="latestpost-content">
-				<div class="latestpost-head">
+			<div class="blogarticles-content">
+				<div class="blogarticles-head">
 					{% if header %}
-						<div class="latestpost-head-left">
-							<h2>{{ header }}</h2>
+						<div class="testimonial-head-left">
+							{{ header }}
 						</div>
 					{% endif %}
-					<div class="latestpost-head-right">
+					<div class="blogarticles-head-right">
 						<div class="btn-wrap">
 							{{ exposed }}
 						</div>
@@ -59,7 +59,7 @@
 				{{ attachment_before }}
 
 				{% if rows -%}
-					<div class="latestpost-body">
+					<div class="articles-list-wrap">
 						{{ rows }}
 					</div>
 				{% elseif empty -%}
