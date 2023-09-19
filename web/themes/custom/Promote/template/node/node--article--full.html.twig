@@ -1,0 +1,136 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: (optional) The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ * @ingroup themeable
+ */
+#}
+
+
+<article{{attributes}}>
+	<div class="inner-banner" style="background-image: url({{file_url(content.field_article_banner_image.0.0['#media'].field_media_image.0.entity.uri.0.value)}});">
+		<div class="container">
+			<div class="inner-banner-content"></div>
+		</div>
+	</div>
+	<div class="marketing-banner-wrap">
+		<div class="container">
+			<div class="marketing-banner-content">
+
+				<div class="banner-top">
+					<div class="btn-wrap">
+						<a href="{{content.field_catagories.0['#url']}}" class="btn-outline">{{content.field_catagories.0['#title']}}</a>
+					</div>
+					<span class="span-tag">{{date}}</span>
+				</div>
+				<div class="title">
+					<h1>{{ label }}</h1>
+				</div>
+
+				<div class="banner-img-wrap">
+					<img src="{{file_url(content.field_image.0['#item'].entity.uri.0.value)}}" alt="">
+				</div>
+				<div class="marketing-banner-profile">
+					<div class="profile-info">
+						<div class="img-wrap">
+							{{ author_picture }}
+						</div>
+						<div class="name">
+							<h5>{{ author_name }}
+							</h5>
+							<h6>Designer</h6>
+						</div>
+					</div>
+					<ul class="profile-social">
+						<li>
+							<a href="#">
+								<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewbox="0 0 27 27" fill="none">
+									<path d="M19.1148 2.67991C20.6046 2.68419 22.0322 3.25559 23.0856 4.2693C24.1391 5.28301 24.7329 6.65667 24.7373 8.09028V18.9098C24.7329 20.3434 24.1391 21.7171 23.0856 22.7308C22.0322 23.7445 20.6046 24.3159 19.1148 24.3202H7.8711C6.38129 24.3159 4.95378 23.7445 3.90033 22.7308C2.84687 21.7171 2.25308 20.3434 2.24863 18.9098V8.09028C2.25308 6.65667 2.84687 5.28301 3.90033 4.2693C4.95378 3.25559 6.38129 2.68419 7.8711 2.67991H19.1148ZM19.1148 0.516113H7.8711C3.5419 0.516113 0 3.9244 0 8.09028V18.9098C0 23.0757 3.5419 26.484 7.8711 26.484H19.1148C23.444 26.484 26.9859 23.0757 26.9859 18.9098V8.09028C26.9859 3.9244 23.444 0.516113 19.1148 0.516113Z" fill="#292930"/>
+									<path d="M20.802 8.09071C20.4685 8.09071 20.1424 7.99553 19.865 7.81719C19.5876 7.63885 19.3715 7.38538 19.2438 7.08881C19.1162 6.79225 19.0828 6.46592 19.1478 6.15109C19.2129 5.83626 19.3735 5.54707 19.6094 5.32009C19.8453 5.09311 20.1458 4.93854 20.473 4.87591C20.8002 4.81329 21.1393 4.84543 21.4475 4.96827C21.7557 5.09111 22.0191 5.29913 22.2044 5.56603C22.3897 5.83293 22.4887 6.14672 22.4887 6.46772C22.4891 6.68098 22.4458 6.89224 22.3612 7.08936C22.2767 7.28647 22.1524 7.46557 21.9957 7.61637C21.839 7.76717 21.6529 7.8867 21.448 7.9681C21.2432 8.04951 21.0237 8.09117 20.802 8.09071ZM13.4936 9.17232C14.3831 9.17232 15.2528 9.42617 15.9924 9.90175C16.7321 10.3773 17.3086 11.0533 17.649 11.8442C17.9895 12.635 18.0785 13.5053 17.905 14.3449C17.7314 15.1845 17.3031 15.9557 16.674 16.561C16.045 17.1663 15.2435 17.5785 14.371 17.7455C13.4985 17.9125 12.5942 17.8268 11.7723 17.4992C10.9504 17.1716 10.248 16.6169 9.75373 15.9051C9.25949 15.1933 8.9957 14.3565 8.9957 13.5005C8.99698 12.353 9.47126 11.2528 10.3145 10.4414C11.1577 9.62995 12.301 9.17355 13.4936 9.17232ZM13.4936 7.00853C12.1592 7.00853 10.8549 7.38927 9.74541 8.10262C8.63596 8.81597 7.77124 9.82987 7.26062 11.0161C6.74999 12.2024 6.61639 13.5077 6.87671 14.767C7.13702 16.0263 7.77956 17.1831 8.72307 18.091C9.66658 18.9989 10.8687 19.6172 12.1774 19.8677C13.4861 20.1182 14.8426 19.9897 16.0753 19.4983C17.3081 19.0069 18.3617 18.1748 19.1031 17.1072C19.8444 16.0396 20.24 14.7845 20.24 13.5005C20.24 11.7787 19.5292 10.1275 18.264 8.90998C16.9988 7.6925 15.2828 7.00853 13.4936 7.00853Z" fill="#292930"/>
+								</svg>
+							</li>
+						</li>
+					</a>
+					<li>
+						<a href="#">
+							<svg xmlns="http://www.w3.org/2000/svg" width="29" height="27" viewbox="0 0 29 27" fill="none">
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M28.8713 13.5786C28.8713 6.36668 22.6282 0.519043 14.9286 0.519043C7.22904 0.519043 0.985962 6.36668 0.985962 13.5786C0.985962 20.0967 6.08375 25.4995 12.7501 26.4801V17.3548H9.20903V13.5786H12.7501V10.7014C12.7501 7.42893 14.8322 5.61984 18.0166 5.61984C19.5422 5.61984 21.1381 5.8752 21.1381 5.8752V9.08936H19.3791C17.6481 9.08936 17.1066 10.0956 17.1066 11.1299V13.5786H20.9732L20.3557 17.3548H17.1072V26.4813C23.7735 25.5012 28.8713 20.0984 28.8713 13.5786Z" fill="#292930"/>
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<svg xmlns="http://www.w3.org/2000/svg" width="27" height="21" viewbox="0 0 27 21" fill="none">
+								<path d="M26.9029 2.56056C25.9264 2.98454 24.8933 3.26387 23.8361 3.38972C24.9471 2.7396 25.7827 1.70677 26.186 0.484931C25.1355 1.09873 23.9882 1.52939 22.7932 1.75849C22.29 1.23147 21.6847 0.81221 21.0143 0.526197C20.3439 0.240184 19.6223 0.0933894 18.8933 0.0947357C15.942 0.0947357 13.5536 2.44675 13.5536 5.34612C13.5515 5.74941 13.5977 6.1515 13.6913 6.5438C11.575 6.44466 9.50268 5.90517 7.60696 4.95986C5.71123 4.01454 4.03384 2.6842 2.6821 1.05397C2.20788 1.85285 1.95709 2.76435 1.95593 3.69321C1.95593 5.51412 2.90663 7.12368 4.34216 8.06665C3.49165 8.04648 2.65856 7.82153 1.91363 7.4109V7.47594C1.91363 10.023 3.75754 12.142 6.198 12.6244C5.73908 12.7466 5.26616 12.8085 4.79121 12.8086C4.4542 12.8092 4.11795 12.7765 3.78736 12.7111C4.46581 14.7975 6.44042 16.315 8.77948 16.3583C6.87883 17.822 4.54533 18.6132 2.14574 18.6074C1.71981 18.6067 1.29427 18.5814 0.871277 18.5315C3.31238 20.0891 6.14998 20.9131 9.0463 20.9052C18.8819 20.9052 24.2553 12.9007 24.2553 5.95851C24.2553 5.7309 24.2493 5.50328 24.2385 5.28109C25.2814 4.53975 26.1837 3.61848 26.9029 2.56056Z" fill="#292930"/>
+							</svg>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{{content.body|raw}}</article>

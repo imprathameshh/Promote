@@ -24,6 +24,7 @@
         "drupal/gin": "^3.0@RC",
         "drupal/gin_toolbar": "^1.0@RC",
         "drupal/paragraphs": "^1.16",
+        "drupal/pathauto": "^1.11",
         "drupal/starrating": "^4.1@alpha",
         "drupal/webform": "^6.2@beta",
         "drush/drush": "^12.2"

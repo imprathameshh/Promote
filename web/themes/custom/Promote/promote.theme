@@ -13,7 +13,7 @@ function promote_theme_suggestions_views_view_alter(array &$suggestions, array $
 
 function promote_form_alter(&$form, &$form_state, $form_id)
 {
-  if ($form['#form_id'] == 'views_exposed_form') {
+  if ($form['#id'] == 'views-exposed-form-blogs-block-1') {
   }
   // Form alter for blog search form. 
   if ($form['#id'] == 'views-exposed-form-blogs-block-2') {
