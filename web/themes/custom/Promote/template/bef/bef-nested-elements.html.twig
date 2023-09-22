@@ -15,7 +15,7 @@
 {% apply spaceless %}
 {% set delta = (current_nesting_level - new_nesting_level) | abs %}
 {% if loop.first %}
-	<ul>
+	<div class="btn-wrap">
 	{% else %}
 		{% if delta %}
 			{% for i in 1..delta %}
@@ -26,13 +26,17 @@
 				{% endif %}
 			{% endfor %}
 		{% endif %}
-{% endif %}
+	{% endif %}
 
-<li>{{ item }}
+	{# {{ dump(item|keys) }} #}
 
 	{% if loop.last %}
-		{# Close any remaining <li> tags #}
-		{% for i in new_nesting_level..0 %}
-		</li>
-	</ul>
-{% endfor %}{% endif %}{% endapply %}
+		Close any remaining
+		<li>
+			tags
+			{% for i in new_nesting_level..0 %}
+			</li>
+		{% endfor %}
+	</div>
+{% endif %}
+{% endapply %}

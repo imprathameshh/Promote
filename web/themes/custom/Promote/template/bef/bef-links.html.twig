@@ -18,6 +18,7 @@
 		{% endif %}
 		{% set new_nesting_level = attribute(depth, child) %}
 		{% include '@better_exposed_filters/bef-nested-elements.html.twig' %}
+
 		{% set current_nesting_level = new_nesting_level %}
 	{% endfor %}
 </div>
